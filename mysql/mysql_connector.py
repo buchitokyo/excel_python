@@ -57,4 +57,8 @@ class MysqlConnector:
         self.cnx.close
         self.cursor = None
         self.cnx = None
+        
+        
+    if __name__ == "__main__":
+        print("mysql_connector")
 

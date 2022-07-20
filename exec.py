@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[1]:
 
 
 import sys
@@ -11,7 +11,8 @@ sys.path.append("/work/excel")
 from mysql_connector import MysqlConnector
 from export import Excel
 
-spreadsheet = Excel()
+# sheet num
+spreadsheet = Excel(2)
 spreadsheet.export('maintenances')
 
 

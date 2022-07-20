@@ -16,20 +16,22 @@ from mysql_connector import MysqlConnector
 
 class Excel:
 
-    FILE: str = ""
+    FILE: str = "GLOBIS学び放題フレッシャーズ集計エクセル.xlsx"
+    sheetNum: int = 0
 
-    def __init__(self):
+    def __init__(self, sheetNum):
+        self.sheetNum = sheetNum
         warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
     def export(self, table_name):
         start = time.perf_counter()
         print('Start: ' + str(start))
+
         wb = openpyxl.load_workbook(self.FILE)
+        print("Open file.")
 
         # switch sheet
-        wb, ws = Excel.switch(self, wb, 2)
-
-        print("Open file.")
+        wb, ws = Excel.switch(self, wb, self.sheetNum)
 
         # fetch
         sql = 'select * from ' + table_name
@@ -68,4 +70,7 @@ class Excel:
 
         print(str(row_index) + ' rows written successfully to ' + self.FILE)
         return
+
+    if __name__ == "__main__":
+        print("export")
 
