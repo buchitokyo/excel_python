@@ -16,8 +16,8 @@ from mysql_connector import MysqlConnector
 
 class Excel:
 
-    FILE: str = "GLOBIS学び放題フレッシャーズ集計エクセル.xlsx"
-        
+    FILE: str = ""
+
     def __init__(self):
         warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
@@ -28,6 +28,8 @@ class Excel:
 
         # switch sheet
         wb, ws = Excel.switch(self, wb, 2)
+
+        print("Open file.")
 
         # fetch
         sql = 'select * from ' + table_name
@@ -66,6 +68,4 @@ class Excel:
 
         print(str(row_index) + ' rows written successfully to ' + self.FILE)
         return
-
-    
 

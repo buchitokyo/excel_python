@@ -26,16 +26,13 @@ class MysqlConnector:
             self.cnx.autocommit = False
 
             self.cursor = self.cnx.cursor(dictionary=True)
-            print(self.cnx.is_connected())
-            print('Connected with DB.')
+            if (self.cnx.is_connected()):
+                print('Connected with DB.')
 
         except (mydb.errors.ProgrammingError) as e:
             print(e)
             print("Failed to connect with DB.")
             sys.exit(1)
-        # finally:
-        #    if cnx is not None and cnx.is_connected():
-        #        cnx.close()
 
 
     def fetch(self, sql):
@@ -45,7 +42,7 @@ class MysqlConnector:
 
             header = [row[0] for row in self.cursor.description]
             rows: List[Dict[str, Any]] = self.cursor.fetchall()
-                
+
             MysqlConnector._close_connection(self)
 
             return header, rows
